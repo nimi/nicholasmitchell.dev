@@ -1,0 +1,8 @@
+# node.js dependencies
+node_modules
+
+# macOS Desktop Services Store
+.DS_Store
+
+# Gatsby cache
+.cache

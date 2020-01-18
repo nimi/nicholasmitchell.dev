@@ -1,0 +1,1 @@
+{"version":3,"file":"cms.28a69772c698ef1a7376.hot-update.js","sources":["webpack:///./src/netlifycms/index.js"],"sourcesContent":["import CMS from 'netlify-cms-app'\n\nCMS.init({\n  config: {\n    backend: {\n      name: 'git-gateway',\n    },\n  },\n})\n"],"mappings":";;;;;;;;;;;;;;;;;AAAA;AAEA;AACA;AACA;AACA;AADA;AADA;AADA;;;;A","sourceRoot":""}
