@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import Layout from '../layout'
-import PostListing from '../components/PostListing/PostListing'
+import PostList from '../components/PostList'
 import config from '../../data/SiteConfig'
 
 function CategoryTemplate(props: any) {
@@ -12,7 +12,7 @@ function CategoryTemplate(props: any) {
     <Layout>
       <div className="category-container">
         <Helmet title={`Posts in category "${category}" | ${config.siteTitle}`} />
-        <PostListing postEdges={postEdges} />
+        <PostList postEdges={postEdges} />
       </div>
     </Layout>
   )
