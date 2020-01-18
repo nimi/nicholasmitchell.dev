@@ -12,7 +12,7 @@ function CategoryTemplate(props: any) {
     <Layout>
       <div className="category-container">
         <Helmet title={`Posts in category "${category}" | ${config.siteTitle}`} />
-        <PostList postEdges={postEdges} />
+        <PostList items={postEdges} />
       </div>
     </Layout>
   )
