@@ -6,3 +6,11 @@ node_modules
 
 # Gatsby cache
 .cache
+
+yarn-error.log
+
+*.log
+
+# Build directory
+/public/
+/coverage/
