@@ -1,0 +1,16 @@
+# node.js dependencies
+node_modules
+
+# macOS Desktop Services Store
+.DS_Store
+
+# Gatsby cache
+.cache
+
+yarn-error.log
+
+*.log
+
+# Build directory
+/public/
+/coverage/
