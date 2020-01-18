@@ -3,8 +3,8 @@ import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import Layout from '../layout'
-import PostListing from '../components/PostListing/PostListing'
-import SEO from '../components/SEO/SEO'
+import PostList from '../components/PostList'
+import SEO from '../components/SEO'
 import config from '../../data/SiteConfig'
 
 function PostListTemplate(props: any) {
@@ -16,7 +16,7 @@ function PostListTemplate(props: any) {
         <div className="posts-container">
           <Helmet title={config.siteTitle} />
           <SEO />
-          <PostListing postEdges={postEdges} />
+          <PostList items={postEdges} />
         </div>
       </PostListBox>
     </Layout>

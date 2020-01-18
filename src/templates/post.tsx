@@ -4,9 +4,9 @@ import styled from 'styled-components'
 import { graphql } from 'gatsby'
 
 import Layout from '../layout'
-import PostTags from '../components/PostTags/PostTags'
-import SEO from '../components/SEO/SEO'
-import Footer from '../components/Footer/Footer'
+import TagList from '../components/TagList'
+import SEO from '../components/SEO'
+import Footer from '../components/Footer'
 import config from '../../data/SiteConfig'
 
 function PostTemplate({ data, pageContext }: any) {
@@ -31,7 +31,7 @@ function PostTemplate({ data, pageContext }: any) {
           <h1>{post.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
           <PostMeta>
-            <PostTags tags={post.tags} />
+            <TagList tags={post.tags} />
           </PostMeta>
           <Footer config={config} />
         </div>
