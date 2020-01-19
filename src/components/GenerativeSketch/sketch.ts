@@ -182,7 +182,11 @@ function renderSketch(element: HTMLElement) {
   canvasOptions.width = rect.width
   canvasOptions.height = rect.height
 
-  new p5(sketch, element)
+  try {
+    new p5(sketch, element)
+  } catch (err) {
+    console.log('Could not initialize p5. If this is using SSR or prerender, that is normal')
+  }
 }
 
 export default renderSketch
