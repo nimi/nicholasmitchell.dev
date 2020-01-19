@@ -1,7 +1,8 @@
-import p5 from 'p5'
 import * as tome from 'chromotome'
 // import * as dat from 'dat.gui'
 import tilesets from './tiles'
+
+let p5: any
 
 const opts = {
   cell_scale: 100,
@@ -174,7 +175,7 @@ let sketch = function(p) {
 }
 
 // Setup the sketch
-function renderSketch(element: HTMLElement) {
+async function renderSketch(element: HTMLElement) {
   const rect = element.getBoundingClientRect()
 
   canvasTargetElement = element
@@ -183,7 +184,8 @@ function renderSketch(element: HTMLElement) {
   canvasOptions.height = rect.height
 
   try {
-    new p5(sketch, element)
+    const p5 = await import('p5')
+    new p5.default(sketch, element)
   } catch (err) {
     console.log('Could not initialize p5. If this is using SSR or prerender, that is normal')
   }
