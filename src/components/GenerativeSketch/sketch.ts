@@ -2,25 +2,23 @@ import * as tome from 'chromotome'
 // import * as dat from 'dat.gui'
 import tilesets from './tiles'
 
-let p5: any
-
 const opts = {
-  cell_scale: 100,
-  cell_padding: 15,
-  grid_size: 5,
-  palette_name: 'olympia',
-  stroke_weight: 0,
+  cellScale: 100,
+  cellPadding: 15,
+  gridSize: 5,
+  paletteName: 'olympia',
+  strokeWeight: 0,
 }
 
-const tile_opts = {
+const tileOpts = {
   mode: 'geometry',
   filled: true,
   diagonals: true,
   halves: true,
   circles: true,
-  small_circles: true,
-  quarter_circles: true,
-  half_circles: true,
+  smallCircles: true,
+  quarterCircles: true,
+  halfCircles: true,
   donuts: false,
 }
 
@@ -36,15 +34,15 @@ let sketch = function(p) {
   let palette
   let tiles
 
-  let cell_scale
-  let cell_padding
-  let grid_size
+  let cellScale
+  let cellPadding
+  let gridSize
 
-  let padded_cell_scale
+  let paddedCellScale
   let paddingX
   let paddingY
 
-  let color_grid
+  let colorGrid
 
   const initialFrameRate = 30
   let frameRate = initialFrameRate
@@ -59,22 +57,22 @@ let sketch = function(p) {
     // const gui = new dat.GUI()
     // const f0 = gui.addFolder('General')
     // f0.open()
-    // f0.add(opts, 'cell_scale', 50, 150, 10)
-    // f0.add(opts, 'cell_padding', 0, 50, 5)
-    // f0.add(opts, 'grid_size', 4, 14, 1)
-    // f0.add(opts, 'palette_name', tome.getNames())
-    // f0.add(opts, 'stroke_weight', 0, 10, 1)
+    // f0.add(opts, 'cellScale', 50, 150, 10)
+    // f0.add(opts, 'cellPadding', 0, 50, 5)
+    // f0.add(opts, 'gridSize', 4, 14, 1)
+    // f0.add(opts, 'paletteName', tome.getNames())
+    // f0.add(opts, 'strokeWeight', 0, 10, 1)
     // const f1 = gui.addFolder('Tilesets')
     // f1.open()
-    // f1.add(tile_opts, 'mode', ['crosses', 'arrows', 'zigzags', 'geometry', 'squigglies'])
-    // f1.add(tile_opts, 'filled')
-    // f1.add(tile_opts, 'diagonals')
-    // f1.add(tile_opts, 'halves')
-    // f1.add(tile_opts, 'circles')
-    // f1.add(tile_opts, 'small_circles')
-    // f1.add(tile_opts, 'half_circles')
-    // f1.add(tile_opts, 'quarter_circles')
-    // f1.add(tile_opts, 'donuts')
+    // f1.add(tileOpts, 'mode', ['crosses', 'arrows', 'zigzags', 'geometry', 'squigglies'])
+    // f1.add(tileOpts, 'filled')
+    // f1.add(tileOpts, 'diagonals')
+    // f1.add(tileOpts, 'halves')
+    // f1.add(tileOpts, 'circles')
+    // f1.add(tileOpts, 'smallCircles')
+    // f1.add(tileOpts, 'halfCircles')
+    // f1.add(tileOpts, 'quarterCircles')
+    // f1.add(tileOpts, 'donuts')
   }
 
   p.draw = function() {
@@ -82,8 +80,8 @@ let sketch = function(p) {
       p.frameRate(0.35)
     }
 
-    update_props()
-    draw_tiles()
+    updateProps()
+    drawTiles()
   }
 
   p.windowResized = function() {
@@ -95,48 +93,48 @@ let sketch = function(p) {
     p.resizeCanvas(rect.width, rect.height)
   }
 
-  function update_props() {
-    palette = tome.get(opts.palette_name)
-    tiles = get_tiles()
+  function updateProps() {
+    palette = tome.get(opts.paletteName)
+    tiles = getTiles()
 
-    cell_padding = opts.cell_padding
-    cell_scale = opts.cell_scale
-    grid_size = opts.grid_size
+    cellPadding = opts.cellPadding
+    cellScale = opts.cellScale
+    gridSize = opts.gridSize
 
-    padded_cell_scale = cell_padding + cell_scale
-    paddingX = (canvasOptions.width - padded_cell_scale * grid_size + cell_padding) / 2
-    paddingY = (canvasOptions.height - padded_cell_scale * grid_size + cell_padding) / 2
+    paddedCellScale = cellPadding + cellScale
+    paddingX = (canvasOptions.width - paddedCellScale * gridSize + cellPadding) / 2
+    paddingY = (canvasOptions.height - paddedCellScale * gridSize + cellPadding) / 2
 
-    color_grid = get_color_grid()
+    colorGrid = getColorGrid()
   }
 
-  function get_color_grid() {
-    const color_grid = []
-    for (let y = 0; y < grid_size + 1; y++) {
+  function getColorGrid() {
+    const colorGrid = []
+    for (let y = 0; y < gridSize + 1; y++) {
       const row = []
-      for (let x = 0; x < grid_size + 1; x++) {
+      for (let x = 0; x < gridSize + 1; x++) {
         row.push(palette.colors[p.floor(p.random() * palette.size)])
       }
-      color_grid.push(row)
+      colorGrid.push(row)
     }
-    return color_grid
+    return colorGrid
   }
 
-  function get_tiles() {
-    if (tile_opts.mode === 'crosses') return tilesets.crosses
-    if (tile_opts.mode === 'arrows') return tilesets.arrows
-    if (tile_opts.mode === 'zigzags') return tilesets.zigzags
-    if (tile_opts.mode === 'squigglies') return tilesets.two_quarters
-    if (tile_opts.mode === 'geometry') {
+  function getTiles() {
+    if (tileOpts.mode === 'crosses') return tilesets.crosses
+    if (tileOpts.mode === 'arrows') return tilesets.arrows
+    if (tileOpts.mode === 'zigzags') return tilesets.zigzags
+    if (tileOpts.mode === 'squigglies') return tilesets.twoQuarters
+    if (tileOpts.mode === 'geometry') {
       let tiles = [].concat(
-        tile_opts.filled ? tilesets.fills : [],
-        tile_opts.halves ? tilesets.halves : [],
-        tile_opts.diagonals ? tilesets.diagonals : [],
-        tile_opts.circles ? tilesets.circles : [],
-        tile_opts.small_circles ? tilesets.small_circles : [],
-        tile_opts.half_circles ? tilesets.half_circles : [],
-        tile_opts.quarter_circles ? tilesets.quarter_circles : [],
-        tile_opts.donuts ? tilesets.donuts : [],
+        tileOpts.filled ? tilesets.fills : [],
+        tileOpts.halves ? tilesets.halves : [],
+        tileOpts.diagonals ? tilesets.diagonals : [],
+        tileOpts.circles ? tilesets.circles : [],
+        tileOpts.smallCircles ? tilesets.smallCircles : [],
+        tileOpts.halfCircles ? tilesets.halfCircles : [],
+        tileOpts.quarterCircles ? tilesets.quarterCircles : [],
+        tileOpts.donuts ? tilesets.donuts : [],
       )
 
       return tiles.length === 0 ? tilesets.fills : tiles
@@ -144,38 +142,39 @@ let sketch = function(p) {
     return []
   }
 
-  function draw_tiles() {
-    p.strokeWeight(opts.stroke_weight)
-    p.stroke(palette.stroke)
+  function drawTiles() {
+    console.log(palette)
+    p.strokeWeight(opts.strokeWeight)
+    // p.stroke(palette.stroke)
     p.background(palette.background)
-    for (let y = 0; y < grid_size; y++) {
-      for (let x = 0; x < grid_size; x++) {
-        const xpos = paddingX + x * padded_cell_scale
-        const ypos = paddingY + y * padded_cell_scale
+    for (let y = 0; y < gridSize; y++) {
+      for (let x = 0; x < gridSize; x++) {
+        const xpos = paddingX + x * paddedCellScale
+        const ypos = paddingY + y * paddedCellScale
         const cols = [
-          color_grid[y][x],
-          color_grid[y][x + 1],
-          color_grid[y + 1][x + 1],
-          color_grid[y + 1][x],
+          colorGrid[y][x],
+          colorGrid[y][x + 1],
+          colorGrid[y + 1][x + 1],
+          colorGrid[y + 1][x],
         ]
-        draw_random_tile(xpos, ypos, cell_scale, cols)
+        drawRandomTile(xpos, ypos, cellScale, cols)
       }
     }
   }
 
-  function draw_random_tile(x, y, dim, cols) {
-    let selected_colors =
-      tile_opts.mode === 'arrows' || tile_opts.mode === 'zigzags'
+  function drawRandomTile(x, y, dim, cols) {
+    let selectedColors =
+      tileOpts.mode === 'arrows' || tileOpts.mode === 'zigzags'
         ? cols
         : p.shuffle(palette.colors).slice(0, 3)
-    let tile_function = tiles[p.floor(p.random() * tiles.length)]
+    let tileFunction = tiles[p.floor(p.random() * tiles.length)]
 
-    tile_function(p, x, y, dim, ...selected_colors)
+    tileFunction(p, x, y, dim, ...selectedColors)
   }
 }
 
 // Setup the sketch
-async function renderSketch(element: HTMLElement) {
+async function renderSketch(element: HTMLElement, options = {}) {
   const rect = element.getBoundingClientRect()
 
   canvasTargetElement = element
@@ -183,8 +182,14 @@ async function renderSketch(element: HTMLElement) {
   canvasOptions.width = rect.width
   canvasOptions.height = rect.height
 
+  Object.assign(opts, options)
+
   try {
     const p5 = await import('p5')
+    const canvas = element.querySelector('canvas')
+
+    if (canvas) element.removeChild(canvas)
+
     new p5.default(sketch, element)
   } catch (err) {
     console.log('Could not initialize p5. If this is using SSR or prerender, that is normal')

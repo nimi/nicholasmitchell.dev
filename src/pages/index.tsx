@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
@@ -6,6 +6,7 @@ import { Link } from 'gatsby'
 import Layout from '../layout'
 import config from '../../data/SiteConfig'
 import GenerativeSketch from '../components/GenerativeSketch'
+import PalettePicker from '../components/PalettePicker/index'
 
 function IndexPage() {
   return (
@@ -22,11 +23,16 @@ function IndexPage() {
             <ExternalLink href="https://www.netlify.com">Netlify</ExternalLink> to help make apps
             and websites faster, more secure and scalable.
           </IndexHeading>
-          <IndexLinkList role="navigation">
-            <Link to="/posts">Work</Link>
-            <Link to="/posts">Blog</Link>
-            <Link to="/posts">Contact</Link>
-          </IndexLinkList>
+          <IndexFooter>
+            <IndexLinkList role="navigation">
+              <a href="https://github.com/nimi">Work</a>
+              <Link to="/posts">Blog</Link>
+              <a href="https://linkedin.com/in/nicholaslmitchell/">Contact</a>
+            </IndexLinkList>
+            <IndexPalettePicker>
+              <PalettePicker />
+            </IndexPalettePicker>
+          </IndexFooter>
         </Flex>
       </IndexBox>
     </Layout>
@@ -38,14 +44,13 @@ export default IndexPage
 // styles
 
 const IndexBox = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 1fr;
   height: 100vh;
   width: 100%;
 `
 
 const Flex = styled.div`
-  flex: 0 0 50%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -57,18 +62,32 @@ const IndexHeading = styled.h2`
   padding: 2vw 2vw 0 2vw;
 `
 
-const IndexLinkList = styled.div`
+const IndexFooter = styled.footer`
   display: flex;
+  align-items: space-between;
+`
+
+const IndexPalettePicker = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2vw;
+
+  position: relative;
+`
+
+const IndexLinkList = styled.div`
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
   padding: 2vw;
 
   height: 100%;
   width: 100%;
 
   > a {
-    align-self: flex-end;
     font-size: 2vw;
-    line-height: 2.5vw;
-    flex: 1;
+    line-height: 3.5vw;
   }
 `
 

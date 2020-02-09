@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import config from '../../data/SiteConfig'
 import Reset from '../components/Reset'
+import { ThemeProvider } from '../context/theme'
 
 export interface MainLayoutProps {
   children: ReactElement
@@ -15,15 +16,17 @@ const FONT_HREF = 'https://fonts.googleapis.com/css?family=Lexend+Deca&display=s
 function MainLayout(props: MainLayoutProps) {
   const { children, padding = '20px' } = props
   return (
-    <MainLayoutBox padding={padding}>
-      <Reset />
-      <Helmet>
-        <meta name="description" content={config.siteDescription} />
-        <html lang="en" />
-        <link href={FONT_HREF} rel="stylesheet"></link>
-      </Helmet>
-      {children}
-    </MainLayoutBox>
+    <ThemeProvider>
+      <MainLayoutBox padding={padding}>
+        <Reset />
+        <Helmet>
+          <meta name="description" content={config.siteDescription} />
+          <html lang="en" />
+          <link href={FONT_HREF} rel="stylesheet"></link>
+        </Helmet>
+        {children}
+      </MainLayoutBox>
+    </ThemeProvider>
   )
 }
 
