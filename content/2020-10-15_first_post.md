@@ -1,13 +1,13 @@
 ---
-title: "Starting a blog"
-cover: "5.jpg"
-category: "none"
-date: "2020-10-15"
-slug: "starting-a-blog"
+title: Starting a blog
+date: '2020-10-15'
+cover: assets/IMG_1325.jpeg
+slug: starting-a-blog
+category: none
 tags:
-    - blog
-    - everything
-    - universe
+  - blog
+  - everything
+  - universe
 ---
 
 I'm starting a blog in 2020.
