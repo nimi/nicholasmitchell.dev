@@ -8,7 +8,7 @@ import { ThemeProvider } from '../context/theme'
 
 export interface MainLayoutProps {
   children: ReactElement
-  padding: string
+  padding?: string
 }
 
 const FONT_HREF = 'https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap'

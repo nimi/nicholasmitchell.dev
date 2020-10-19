@@ -16,6 +16,13 @@ function PostListTemplate(props: any) {
         <div className="posts-container">
           <Helmet title={config.siteTitle} />
           <SEO />
+          <PostsHeading>Nicholas' Blog</PostsHeading>
+          <PostsLead>
+            <p>
+              Personal blog of <a href="https://twitter.com/nicklmitch">Nicholas Mitchell</a>
+            </p>
+            <p>Sometimes I share original ideas, other times I curate.</p>
+          </PostsLead>
           <PostList items={postEdges} />
         </div>
       </PostListBox>
@@ -60,4 +67,10 @@ const PostListBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+`
+
+const PostsHeading = styled.h1``
+
+const PostsLead = styled.div`
+  margin: 10px 0;
 `

@@ -18,6 +18,8 @@ export interface Props {
 export const ThemeProvider: React.FunctionComponent<Props> = ({ children }) => {
   const [palette, setPalette] = useState(theme.palette)
 
+  console.log(palette, theme)
+
   const value = React.useMemo(
     () => ({
       theme: { ...theme, palette },

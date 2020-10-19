@@ -24,7 +24,7 @@ function PostList(props: PostListProps) {
       {/* Your post list here. */
       postList.map(post => (
         <Link to={post.path} key={post.title}>
-          <h1>{post.title}</h1>
+          <h3>{post.title}</h3>
         </Link>
       ))}
     </div>
