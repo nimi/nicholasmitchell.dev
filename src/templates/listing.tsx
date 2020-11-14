@@ -69,7 +69,9 @@ const PostListBox = styled.div`
   align-items: center;
 `
 
-const PostsHeading = styled.h1``
+const PostsHeading = styled.h1`
+  font-size: 28px;
+`
 
 const PostsLead = styled.div`
   margin: 10px 0;

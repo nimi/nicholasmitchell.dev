@@ -28,7 +28,7 @@ function PostTemplate({ data, pageContext }: any) {
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
         <div>
-          <h1>{post.title}</h1>
+          <PostTitle>{post.title}</PostTitle>
           <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
           <PostMeta>
             <TagList tags={post.tags} />
@@ -69,6 +69,11 @@ const PostMeta = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`
+
+const PostTitle = styled.div`
+  font-size: 28px;
+  margin-bottom: 20px;
 `
 
 const PostBox = styled.div`

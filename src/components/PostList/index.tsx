@@ -25,6 +25,7 @@ function PostList(props: PostListProps) {
       postList.map(post => (
         <Link to={post.path} key={post.title}>
           <h3>{post.title}</h3>
+          <time></time>
         </Link>
       ))}
     </div>
@@ -32,3 +33,8 @@ function PostList(props: PostListProps) {
 }
 
 export default PostList
+
+const PostLink = `
+  font-size:   
+
+`
