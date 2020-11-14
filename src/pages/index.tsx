@@ -26,7 +26,7 @@ function IndexPage() {
           <IndexFooter>
             <IndexLinkList role="navigation">
               <a href="https://github.com/nimi">Work</a>
-              <Link to="/posts">Blog</Link>
+              <a href="https://twitter.com/nicklmitch">Twitter</a>
               <a href="https://linkedin.com/in/nicholaslmitchell/">Contact</a>
             </IndexLinkList>
             <IndexPalettePicker>
