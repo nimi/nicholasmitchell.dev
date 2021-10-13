@@ -29,7 +29,7 @@ const canvasOptions = {
 
 let canvasTargetElement: any = null
 
-let sketch = function(p) {
+let sketch = function (p) {
   let THE_SEED
   let palette
   let tiles
@@ -47,35 +47,15 @@ let sketch = function(p) {
   const initialFrameRate = 30
   let frameRate = initialFrameRate
 
-  p.setup = function() {
+  p.setup = function () {
     p.createCanvas(canvasOptions.width, canvasOptions.height)
     THE_SEED = p.floor(p.random(9999999))
     p.randomSeed(THE_SEED)
     p.frameRate(frameRate)
     p.strokeJoin(p.ROUND)
-
-    // const gui = new dat.GUI()
-    // const f0 = gui.addFolder('General')
-    // f0.open()
-    // f0.add(opts, 'cellScale', 50, 150, 10)
-    // f0.add(opts, 'cellPadding', 0, 50, 5)
-    // f0.add(opts, 'gridSize', 4, 14, 1)
-    // f0.add(opts, 'paletteName', tome.getNames())
-    // f0.add(opts, 'strokeWeight', 0, 10, 1)
-    // const f1 = gui.addFolder('Tilesets')
-    // f1.open()
-    // f1.add(tileOpts, 'mode', ['crosses', 'arrows', 'zigzags', 'geometry', 'squigglies'])
-    // f1.add(tileOpts, 'filled')
-    // f1.add(tileOpts, 'diagonals')
-    // f1.add(tileOpts, 'halves')
-    // f1.add(tileOpts, 'circles')
-    // f1.add(tileOpts, 'smallCircles')
-    // f1.add(tileOpts, 'halfCircles')
-    // f1.add(tileOpts, 'quarterCircles')
-    // f1.add(tileOpts, 'donuts')
   }
 
-  p.draw = function() {
+  p.draw = function () {
     if (frameRate === initialFrameRate) {
       p.frameRate(0.35)
     }
@@ -84,7 +64,7 @@ let sketch = function(p) {
     drawTiles()
   }
 
-  p.windowResized = function() {
+  p.windowResized = function () {
     const rect = canvasTargetElement.getBoundingClientRect()
 
     canvasOptions.width = rect.width
@@ -143,7 +123,6 @@ let sketch = function(p) {
   }
 
   function drawTiles() {
-    console.log(palette)
     p.strokeWeight(opts.strokeWeight)
     // p.stroke(palette.stroke)
     p.background(palette.background)
@@ -176,6 +155,7 @@ let sketch = function(p) {
 // Setup the sketch
 async function renderSketch(element: HTMLElement, options = {}) {
   const rect = element.getBoundingClientRect()
+  // element.innerHTML = ''
 
   canvasTargetElement = element
 

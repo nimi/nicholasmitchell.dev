@@ -1,73 +1,51 @@
-import React, { ChangeEvent, useState, useEffect } from 'react'
 import * as tome from 'chromotome'
 
-import { useTheme } from '../../context/theme'
-import { Modal } from '../ui/Modal'
-import styled from 'styled-components'
+import { Modal } from '../Modal'
+
+const PALETTE_NAMES = tome.getNames()
 
 function PalettePickerModal(props: any) {
-  const { setPalette, theme } = useTheme()
+  const paletteOptions = PALETTE_NAMES
+  const handleSelect = (name) => {
+    props.onSelect(name)
+  }
 
   return (
     <Modal {...props}>
-      <PalettePickerBox>
-        <PickerLabel>Choose a palette</PickerLabel>
-        <PaletteList>
-          {theme.paletteOptions.map(name => (
-            <ColorBar
-              onClick={() => setPalette(name)}
+      <div
+        style={{
+          backgroundColor: 'white',
+          marginLeft: 'auto',
+          width: '50%',
+        }}
+      >
+        <h4 style={{ lineHeight: '4vw', paddingLeft: '10px', margin: 0 }}>Choose a palette</h4>
+        <div style={{ display: 'flex', flexDirection: 'column', overflow: 'auto' }}>
+          {paletteOptions.map((name) => (
+            <div
+              className="palette-picker-item"
+              style={{
+                height: 50,
+                border: props.palette === name ? 'solid white 10px' : 'none',
+                flex: '1 1 auto',
+                backgroundImage: `
+                  linear-gradient(
+                    to right,
+                    ${tome.get(name).colors[0]},
+                    ${tome.get(name).colors[1]}
+                  )
+                `,
+                transition: 'background-image 0.5s linear',
+              }}
+              onClick={() => handleSelect(name)}
               colors={tome.get(name).colors}
               active={props.palette === name}
             />
           ))}
-        </PaletteList>
-      </PalettePickerBox>
+        </div>
+      </div>
     </Modal>
   )
 }
 
 export default PalettePickerModal
-
-const PickerLabel = styled.h4`
-  line-height: 4vw;
-  padding-left: 10px;
-`
-
-const PalettePickerBox = styled.div`
-  background-color: white;
-  margin-left: auto;
-  width: 50%;
-`
-
-const PaletteList = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-
-  > div {
-    height: 50px;
-  }
-`
-
-const ColorBar = styled.div<{ colors: Array<string> }>`
-  border: ${props => (props.active ? 'solid white 10px' : 'none')};
-
-  flex: 1 1 auto;
-
-  background-image: ${props => {
-    return `
-      linear-gradient(
-        to right,
-        ${props.colors[0]},
-        ${props.colors[1]}
-      )
-    `
-  }};
-  transition: background-image 0.5s linear;
-
-  height: 100%;
-
-  &:hover {
-    border: solid white 10px;
-  }
-`
