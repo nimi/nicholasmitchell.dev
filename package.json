@@ -1,7 +1,8 @@
 {
-  "name": "@example/blog",
-  "version": "0.0.1",
-  "private": true,
+  "name": "nicholasmitchell.me",
+  "description": "Personal website and blog for Nicholas Mitchell",
+  "version": "2.0.0",
+  "author": "Nicholas Mitchell <mitchellnicholasl@gmail.com>",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
