@@ -1,3 +1,3 @@
-# Personal website and blog
+# Personal website
 
-Powered by Gatsby & Netlify CMS
+Powered by Astro and Preact

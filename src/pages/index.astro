@@ -1,0 +1,328 @@
+---
+// Component Imports
+import BaseHead from '../components/BaseHead.astro';
+import GenerativeSketch from '../components/GenerativeSketch/GenerativeSketch.tsx'
+import PalettePicker from '../components/PalettePicker/PalettePicker.tsx'
+
+let title = 'Nicholas Mitchell | Frontend Engineer 🏄🏻‍♂️';
+let description = 'Hi 👋🏻! Welcome to my personal website. Thanks for stopping by';
+let permalink = 'https://nicholasmitchell.dev/';
+
+---
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} permalink={permalink} />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" />
+
+    <style>
+      html,
+      body,
+      div,
+      span,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      em,
+      img,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      /* HTML5 hidden-attribute fix for newer browsers */
+      *[hidden] {
+        display: none;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: '';
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+        font-family: 'Lexend Deca', sans-serif;
+        font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0,
+          'dlig' 1;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        min-width: 100%;
+      }
+
+      #___gatsby #gatsby-focus-wrapper {
+        min-height: 100vh;
+        min-width: 100vw;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      main {
+        min-height: 100vh;
+        min-width: 100vw;
+        display: flex;
+        padding: 0px;
+      }
+
+      h1 {
+        font-size: 3vw;
+        line-height: 3.5vw;
+        padding: 2vw 2vw 0 2vw;
+      }
+
+      .home {
+        display: grid;
+        grid-template-columns: 50% 1fr;
+        height: 100vh;
+        width: 100%;
+      }
+
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .home-controls {
+        display: flex;
+        align-items: space-between;
+      }
+
+      .home-link-list {
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: column;
+        padding: 2vw;
+
+        height: 100%;
+        width: 100%;
+      }
+
+      .home-link-list > a {
+        font-size: 2vw;
+        line-height: 3.5vw;
+      }
+
+      .home-palette-picker {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2vw;
+
+        position: relative;
+      }
+
+      .generative-sketch {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+
+    <style global>
+      .modal-wrapper {
+        background-color: transparent;
+
+        border-radius: 3px;
+
+        overflow: auto;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+
+        height: 100vh;
+        width: 100%;
+        min-width: 490px;
+      }
+
+      .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.45);
+
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1;
+
+        height: 100vh;
+        width: 100%;
+      }
+
+      .modal-close-button {
+        background: none;
+        border: none;
+        outline: 0;
+        cursor: pointer;
+        position: absolute;
+        right: 4px;
+        top: 12px;
+      }
+
+      .modal-close-button:focus {
+        box-shadow: 0 0 0 2px black;
+      }
+
+      .palette-picker {
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 2vw;
+        position: relative;
+      }
+
+      .palette-picker-bar-list {
+        display: flex;
+        padding: 0px 20px;
+        width: 100px;
+        justify-content: space-around;
+      }
+
+      .palette-picker-item {
+        cursor: pointer;
+      }
+
+      .palette-picker-item:hover {
+        border: solid white 10px !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="layout">
+      <main>
+        <div class="home">
+          <div class="flex-container">
+            <GenerativeSketch client:load />
+          </div>
+          <div class="flex-container">
+            <h1>
+              Hi, I'm Nicholas. I'm a software engineer, listener, thinker, and problem solver.
+              Currently, I'm working with <a href="https://www.netlify.com">Netlify</a> to help make apps
+              and websites faster, more secure and scalable.
+            </h1>
+            <div class="home-controls">
+              <div class="home-link-list" role="navigation">
+                <a href="https://github.com/nimi">Work</a>
+                <a href="https://twitter.com/nicklmitch">Twitter</a>
+                <a href="https://linkedin.com/in/nicholaslmitchell/">Contact</a>
+              </div>
+              <div class="home-palette-picker">
+                <PalettePicker client:load />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
