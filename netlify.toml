@@ -2,6 +2,6 @@
   publish = "dist"
   command = "yarn build"
 [build.environment]
-  NODE_VERSION = "12.20.0"
+  NODE_VERSION = "14.x"
   YARN_VERSION = "1.19.1"
   YARN_FLAGS = "--no-ignore-optional"
