@@ -3,12 +3,15 @@ import * as tome from 'chromotome'
 
 import PalettePickerModal from './PalettePickerModal'
 
+import { DEFAULT_PALETTE } from '../../constants'
+
 function PalettePicker() {
-  const paletteName = 'olympia'
+  const [paletteName, setPaletteName] = useState(DEFAULT_PALETTE)
   const palette = tome.get(paletteName)
   const [modalOpen, setModalOpen] = useState(false)
 
   const onSelect = (palette) => {
+    setPaletteName(palette)
     const event = new CustomEvent('palette-update', {
       detail: {
         palette,

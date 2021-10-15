@@ -166,6 +166,10 @@ let permalink = 'https://nicholasmitchell.dev/';
         color: inherit;
       }
 
+      a:hover {
+        color: var(--link-hover-color);
+      }
+
       main {
         min-height: 100vh;
         min-width: 100vw;
@@ -189,6 +193,7 @@ let permalink = 'https://nicholasmitchell.dev/';
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background-color: var(--background-color);
       }
 
       .container.second h1 {
@@ -243,6 +248,10 @@ let permalink = 'https://nicholasmitchell.dev/';
           display: none;
         }
 
+        .container.first {
+          background-color: black;
+        }
+
         .container.second h1 {
           display: block;
         }
@@ -275,6 +284,25 @@ let permalink = 'https://nicholasmitchell.dev/';
     </style>
 
     <style global>
+      :root {
+        --text-color: black;
+        --background-color: white;
+        --link-hover-color: #841578;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text-color: white;
+          --background-color: #333333;
+          --link-hover-color: #d49dce;
+        }
+      }
+
+      body {
+        color: var(--text-color);
+        background-color: var(--background-color);
+      }
+
       .modal-wrapper {
         background-color: transparent;
 
@@ -305,17 +333,18 @@ let permalink = 'https://nicholasmitchell.dev/';
       }
 
       .modal-close-button {
+        color: var(--text-color);
         background: none;
         border: none;
         outline: 0;
         cursor: pointer;
         position: absolute;
         right: 4px;
-        top: 12px;
+        top: 1.2rem;
       }
 
       .modal-close-button:focus {
-        box-shadow: 0 0 0 2px black;
+        box-shadow: 0 0 0 2px var(--text-color);
       }
 
       .palette-picker {
@@ -335,11 +364,12 @@ let permalink = 'https://nicholasmitchell.dev/';
       }
 
       .palette-picker-item {
+        box-sizing: border-box;
         cursor: pointer;
       }
 
       .palette-picker-item:hover {
-        border: solid white 10px !important;
+        border: solid var(--text-color) 10px !important;
       }
     </style>
   </head>

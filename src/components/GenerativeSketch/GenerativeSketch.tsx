@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, useLayoutEffect } from 'preact/hooks'
 
 import sketch from './sketch'
 
+import { DEFAULT_PALETTE } from '../../constants'
 interface GenerativeSketchProps {
   cellScale: number
   cellPadding: number
@@ -14,14 +15,19 @@ function GenerativeSketch(props: GenerativeSketchProps) {
   const options = { ...props, auto: true }
   const sketchRef: any = useRef(null)
   const loadedRef: any = useRef(false)
-  const paletteRef: any = useRef('olympia')
+  const paletteRef: any = useRef(DEFAULT_PALETTE)
   const isSmallScreen = useMediaQuery('(max-width: 68em)')
+  const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
   const draw = () => {
     sketch(sketchRef.current, {
       ...options,
       background: !isSmallScreen,
+      backgroundColor: prefersDark ? 'black' : null,
       paletteName: paletteRef.current,
       gridPadding: isSmallScreen ? 0 : 100,
+      tileOpts: {
+        mode: 'geometry',
+      },
     })
   }
 
@@ -38,7 +44,7 @@ function GenerativeSketch(props: GenerativeSketchProps) {
       window.removeEventListener('resize', debouncedDraw)
       window.removeEventListener('palette-update', onPaletteUpdate)
     }
-  }, [isSmallScreen])
+  }, [isSmallScreen, prefersDark])
 
   useLayoutEffect(() => {
     if (!sketchRef.current) return

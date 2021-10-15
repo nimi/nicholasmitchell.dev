@@ -2,19 +2,11 @@ import * as tome from 'chromotome'
 // import * as dat from 'dat.gui'
 import tilesets from './tiles'
 
+import { DEFAULT_PALETTE } from '../../constants'
+
 let drawing = false
 
-const opts = {
-  cellScale: 100,
-  cellPadding: 15,
-  gridPadding: 0,
-  gridSize: 5,
-  paletteName: 'olympia',
-  strokeWeight: 0,
-  background: true,
-}
-
-const tileOpts = {
+let tileOpts = {
   mode: 'geometry',
   filled: true,
   diagonals: true,
@@ -23,7 +15,19 @@ const tileOpts = {
   smallCircles: true,
   quarterCircles: true,
   halfCircles: true,
-  donuts: false,
+  donuts: true,
+}
+
+let opts = {
+  cellScale: 100,
+  cellPadding: 15,
+  gridPadding: 0,
+  gridSize: 5,
+  paletteName: DEFAULT_PALETTE,
+  strokeWeight: 0,
+  background: true,
+  backgroundColor: null,
+  tileOpts,
 }
 
 const canvasOptions = {
@@ -79,7 +83,7 @@ let sketch = function (p) {
   }
 
   function updateProps() {
-    palette = tome.get(opts.paletteName)
+    palette = tome.get(opts.paletteName) // tome.getRandom()
     tiles = getTiles()
 
     cellPadding = opts.cellPadding
@@ -131,7 +135,7 @@ let sketch = function (p) {
   function drawTiles() {
     p.strokeWeight(opts.strokeWeight)
     // p.stroke(palette.stroke)
-    opts.background && p.background(palette.background)
+    opts.background && p.background(opts.backgroundColor || palette.background)
     for (let y = 0; y < gridSize; y++) {
       for (let x = 0; x < gridSize; x++) {
         const xpos = paddingX + x * paddedCellScale
@@ -170,6 +174,8 @@ async function renderSketch(element: HTMLElement, options: any = {}) {
   canvasOptions.height = rect.height
 
   Object.assign(opts, options)
+
+  tileOpts = { ...tileOpts, ...(opts.tileOpts || {}) }
 
   if (options.auto) {
     let autoSize =

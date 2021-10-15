@@ -14,7 +14,7 @@ function PalettePickerModal(props: any) {
     <Modal {...props}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--background-color)',
           marginLeft: 'auto',
           width: '50%',
         }}
@@ -26,7 +26,7 @@ function PalettePickerModal(props: any) {
               className="palette-picker-item"
               style={{
                 height: 50,
-                border: props.palette === name ? 'solid white 10px' : 'none',
+                border: props.palette === name ? 'solid #eee 10px' : 'none',
                 flex: '1 1 auto',
                 backgroundImage: `
                   linear-gradient(
