@@ -2,12 +2,16 @@ import * as tome from 'chromotome'
 // import * as dat from 'dat.gui'
 import tilesets from './tiles'
 
+let drawing = false
+
 const opts = {
   cellScale: 100,
   cellPadding: 15,
+  gridPadding: 0,
   gridSize: 5,
   paletteName: 'olympia',
   strokeWeight: 0,
+  background: true,
 }
 
 const tileOpts = {
@@ -62,6 +66,7 @@ let sketch = function (p) {
 
     updateProps()
     drawTiles()
+    drawing = false
   }
 
   p.windowResized = function () {
@@ -82,6 +87,7 @@ let sketch = function (p) {
     gridSize = opts.gridSize
 
     paddedCellScale = cellPadding + cellScale
+
     paddingX = (canvasOptions.width - paddedCellScale * gridSize + cellPadding) / 2
     paddingY = (canvasOptions.height - paddedCellScale * gridSize + cellPadding) / 2
 
@@ -125,7 +131,7 @@ let sketch = function (p) {
   function drawTiles() {
     p.strokeWeight(opts.strokeWeight)
     // p.stroke(palette.stroke)
-    p.background(palette.background)
+    opts.background && p.background(palette.background)
     for (let y = 0; y < gridSize; y++) {
       for (let x = 0; x < gridSize; x++) {
         const xpos = paddingX + x * paddedCellScale
@@ -136,6 +142,7 @@ let sketch = function (p) {
           colorGrid[y + 1][x + 1],
           colorGrid[y + 1][x],
         ]
+
         drawRandomTile(xpos, ypos, cellScale, cols)
       }
     }
@@ -153,9 +160,9 @@ let sketch = function (p) {
 }
 
 // Setup the sketch
-async function renderSketch(element: HTMLElement, options = {}) {
+async function renderSketch(element: HTMLElement, options: any = {}) {
   const rect = element.getBoundingClientRect()
-  // element.innerHTML = ''
+  element.innerHTML = ''
 
   canvasTargetElement = element
 
@@ -164,11 +171,25 @@ async function renderSketch(element: HTMLElement, options = {}) {
 
   Object.assign(opts, options)
 
+  if (options.auto) {
+    let autoSize =
+      canvasOptions.width > canvasOptions.height ? canvasOptions.height : canvasOptions.width
+
+    autoSize = autoSize - opts.gridPadding
+
+    Object.assign(opts, {
+      cellScale: autoSize / opts.gridSize - opts.cellPadding,
+    })
+  }
+
   try {
     const p5 = await import('p5')
     const canvas = element.querySelector('canvas')
 
+    if (drawing) return
     if (canvas) element.removeChild(canvas)
+
+    drawing = true
 
     new p5.default(sketch, element)
   } catch (err) {

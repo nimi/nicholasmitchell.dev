@@ -20,7 +20,12 @@ function PalettePicker() {
 
   return (
     <>
-      <PalettePickerModal open={modalOpen} onSelect={onSelect} palette={paletteName} />
+      <PalettePickerModal
+        open={modalOpen}
+        onSelect={onSelect}
+        onClose={() => setModalOpen(false)}
+        palette={paletteName}
+      />
       <div
         style={{
           cursor: 'pointer',
@@ -30,7 +35,7 @@ function PalettePicker() {
         }}
         onClick={() => setModalOpen(true)}
       >
-        <span>change palette</span>
+        <span>Change palette</span>
         <div className="palette-picker-bar-list">
           {palette.colors.map((color: string) => (
             <div
