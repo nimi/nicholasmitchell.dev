@@ -46,7 +46,7 @@ function GenerativeSketch(props: GenerativeSketchProps) {
     }
   }, [isSmallScreen, prefersDark])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!sketchRef.current) return
 
     draw()
