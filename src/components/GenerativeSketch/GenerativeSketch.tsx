@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'preact/hooks'
+import { Fragment } from 'preact'
+import { useRef, useEffect, useState } from 'preact/hooks'
 
 import sketch from './sketch'
 
@@ -18,17 +19,22 @@ function GenerativeSketch(props: GenerativeSketchProps) {
   const paletteRef: any = useRef(DEFAULT_PALETTE)
   const isSmallScreen = useMediaQuery('(max-width: 68em)')
   const prefersDark = useMediaQuery('(prefers-color-scheme: dark)')
+  const [drawComplete, setDrawComplete] = useState(false)
   const draw = () => {
-    sketch(sketchRef.current, {
-      ...options,
-      background: !isSmallScreen,
-      backgroundColor: prefersDark ? 'black' : null,
-      paletteName: paletteRef.current,
-      gridPadding: isSmallScreen ? 0 : 100,
-      tileOpts: {
-        mode: 'geometry',
+    sketch(
+      sketchRef.current,
+      {
+        ...options,
+        background: !isSmallScreen,
+        backgroundColor: prefersDark ? 'black' : null,
+        paletteName: paletteRef.current,
+        gridPadding: isSmallScreen ? 0 : 100,
+        tileOpts: {
+          mode: 'geometry',
+        },
       },
-    })
+      () => setDrawComplete(true),
+    )
   }
 
   useEffect(() => {
@@ -57,11 +63,56 @@ function GenerativeSketch(props: GenerativeSketchProps) {
   return (
     <div
       style={{
-        width: '100%',
-        height: isSmallScreen ? '20rem' : '100vh',
+        position: 'relative',
+        height: drawComplete && isSmallScreen ? '20rem' : '100%',
       }}
-      ref={sketchRef}
-    ></div>
+    >
+      {true && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+          }}
+        >
+          <div
+            style={{
+              height: 'min(75vw, 75vh)',
+              width: 'min(75vw, 75vh)',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+              gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
+              columnGap: '15px',
+              rowGap: '15px',
+              opacity: drawComplete ? 0 : 1,
+            }}
+          >
+            {Array(25)
+              .fill(null)
+              .map((_) => (
+                <div
+                  style={{
+                    background: `var(--placeholder-gradient)`,
+                    animation: 'loading 2s ease infinite',
+                    backgroundSize: '200% 200%',
+                  }}
+                />
+              ))}
+          </div>
+        </div>
+      )}
+
+      <div
+        style={{
+          width: '100%',
+          position: 'absolute',
+          top: 0,
+          height: isSmallScreen ? '20rem' : '100vh',
+        }}
+        ref={sketchRef}
+      ></div>
+    </div>
   )
 }
 

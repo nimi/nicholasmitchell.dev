@@ -226,6 +226,7 @@ let permalink = 'https://nicholasmitchell.dev/';
 
       .home-generative-sketch {
         padding: 10vw;
+        height: 100%;
       }
 
       @media (min-width: 68em) {
@@ -288,6 +289,7 @@ let permalink = 'https://nicholasmitchell.dev/';
         --text-color: black;
         --background-color: white;
         --link-hover-color: #841578;
+        --placeholder-gradient: linear-gradient(-1deg, #2c2c2c, #262626);
       }
 
       @media (prefers-color-scheme: dark) {
@@ -295,6 +297,18 @@ let permalink = 'https://nicholasmitchell.dev/';
           --text-color: white;
           --background-color: #333333;
           --link-hover-color: #d49dce;
+        }
+      }
+
+      @media (max-width: 68em) {
+        :root {
+          --placeholder-gradient: linear-gradient(-1deg, #2c2c2c, #262626);
+        }
+      }
+
+      @media (max-width: 68em) and (prefers-color-scheme: dark) {
+        :root {
+          --placeholder-gradient: linear-gradient(-1deg, #3c3c3c, #505050);
         }
       }
 
@@ -370,6 +384,22 @@ let permalink = 'https://nicholasmitchell.dev/';
 
       .palette-picker-item:hover {
         border: solid var(--text-color) 10px !important;
+      }
+
+      @-webkit-keyframes loading {
+        0%{background-position:10% 0%}
+        50%{background-position:91% 100%}
+        100%{background-position:10% 0%}
+      }
+      @-moz-keyframes loading {
+        0%{background-position:10% 0%}
+        50%{background-position:91% 100%}
+        100%{background-position:10% 0%}
+      }
+      @keyframes loading { 
+        0%{background-position:10% 0%}
+        50%{background-position:91% 100%}
+        100%{background-position:10% 0%}
       }
     </style>
   </head>

@@ -37,7 +37,7 @@ const canvasOptions = {
 
 let canvasTargetElement: any = null
 
-let sketch = function (p) {
+let sketch = function (p, onDraw) {
   let THE_SEED
   let palette
   let tiles
@@ -70,6 +70,8 @@ let sketch = function (p) {
 
     updateProps()
     drawTiles()
+
+    if (drawing) onDraw()
     drawing = false
   }
 
@@ -161,10 +163,12 @@ let sketch = function (p) {
 
     tileFunction(p, x, y, dim, ...selectedColors)
   }
+
+  return p
 }
 
 // Setup the sketch
-async function renderSketch(element: HTMLElement, options: any = {}) {
+async function renderSketch(element: HTMLElement, options: any = {}, onDraw = () => {}) {
   const rect = element.getBoundingClientRect()
   element.innerHTML = ''
 
@@ -197,7 +201,11 @@ async function renderSketch(element: HTMLElement, options: any = {}) {
 
     drawing = true
 
-    new p5.default(sketch, element)
+    const doSketch = function (p) {
+      sketch(p, onDraw)
+    }
+
+    new p5.default(doSketch, element)
   } catch (err) {
     console.log('Could not initialize p5. If this is using SSR or prerender, that is normal')
   }
