@@ -1,5 +1,5 @@
 import { Fragment } from 'preact'
-import { useRef, useEffect, useState } from 'preact/hooks'
+import { useRef, useEffect, useState, useLayoutEffect } from 'preact/hooks'
 
 import sketch from './sketch'
 
@@ -73,13 +73,14 @@ function GenerativeSketch(props: GenerativeSketchProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100%',
+            height: isSmallScreen ? '20rem' : 'calc(100vh - 6rem)',
+            padding: isSmallScreen ? 0 : '3rem',
           }}
         >
           <div
             style={{
-              height: 'min(75vw, 75vh)',
-              width: 'min(75vw, 75vh)',
+              height: isSmallScreen ? '20rem' : 'min(45vw, 90vh)',
+              width: isSmallScreen ? '20rem' : 'max(45vw, 75vh)',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
               gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
@@ -91,13 +92,7 @@ function GenerativeSketch(props: GenerativeSketchProps) {
             {Array(25)
               .fill(null)
               .map((_) => (
-                <div
-                  style={{
-                    background: `var(--placeholder-gradient)`,
-                    animation: 'loading 2s ease infinite',
-                    backgroundSize: '200% 200%',
-                  }}
-                />
+                <div className="placeholder-block" />
               ))}
           </div>
         </div>
@@ -109,6 +104,7 @@ function GenerativeSketch(props: GenerativeSketchProps) {
           position: 'absolute',
           top: 0,
           height: isSmallScreen ? '20rem' : '100vh',
+          visibility: drawComplete ? 'visible' : 'hidden',
         }}
         ref={sketchRef}
       ></div>

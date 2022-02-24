@@ -396,10 +396,17 @@ let permalink = 'https://nicholasmitchell.dev/';
         50%{background-position:91% 100%}
         100%{background-position:10% 0%}
       }
-      @keyframes loading { 
+      @keyframes loading {
         0%{background-position:10% 0%}
         50%{background-position:91% 100%}
         100%{background-position:10% 0%}
+      }
+
+      .placeholder-block {
+        aspect-ratio: 1;
+        background: var(--placeholder-gradient);
+        animation: loading 2s ease infinite;
+        background-size: 200% 200%;
       }
     </style>
   </head>
