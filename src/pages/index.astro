@@ -402,6 +402,44 @@ let permalink = 'https://nicholasmitchell.dev/';
         100%{background-position:10% 0%}
       }
 
+      .wrapper {
+        position: relative;
+        height: 100%;
+      }
+
+      .wrapper > .placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 6rem);
+        padding: 3rem;
+      }
+
+      .wrapper > .placeholder > div {
+        width: max(calc(50% - 3rem), calc(100vh - 6rem));
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        column-gap: 15px;
+        row-gap: 15px;
+      }
+
+      @media (max-width: 68em) {
+        .wrapper {
+          height: 20rem;
+        }
+
+        .wrapper > .placeholder {
+          height: 20rem;
+          padding: 0;
+        }
+
+        .wrapper > .placeholder > div {
+          height: 20rem;
+          width: 20rem;
+        }
+      }
+
       .placeholder-block {
         aspect-ratio: 1;
         background: var(--placeholder-gradient);

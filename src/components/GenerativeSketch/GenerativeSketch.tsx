@@ -65,6 +65,7 @@ interface GenerativeSketchProps {
 // }
 
 function GenerativeSketch(props: GenerativeSketchProps) {
+  const isServer = typeof document === 'undefined'
   const options = { ...props, auto: true }
   const sketchRef: any = useRef(null)
   const loadedRef: any = useRef(false)
@@ -113,31 +114,11 @@ function GenerativeSketch(props: GenerativeSketchProps) {
   }, [sketchRef.current])
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        height: drawComplete && isSmallScreen ? '20rem' : '100%',
-      }}
-    >
-      {true && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: isSmallScreen ? '20rem' : 'calc(100vh - 6rem)',
-            padding: isSmallScreen ? 0 : '3rem',
-          }}
-        >
+    <div className="wrapper">
+      {!isServer && (
+        <div className="placeholder">
           <div
             style={{
-              height: isSmallScreen ? '20rem' : null,
-              width: isSmallScreen ? '20rem' : 'max(calc(50% - 3rem), calc(100vh - 6rem))',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
-              gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
-              columnGap: '15px',
-              rowGap: '15px',
               opacity: drawComplete ? 0 : 1,
             }}
           >
