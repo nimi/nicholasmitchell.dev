@@ -1,5 +1,6 @@
 import { Fragment } from 'preact'
-import { useRef, useEffect, useState, useLayoutEffect } from 'preact/hooks'
+import { useRef, useEffect, useState } from 'preact/hooks'
+// import placeholderSrc from './generated-image.png'
 
 import sketch from './sketch'
 
@@ -11,6 +12,57 @@ interface GenerativeSketchProps {
   paletteName: string
   strokeWeight: number
 }
+
+// const Fallback = () => {
+//   return (
+//     <div
+//       style={{
+//         width: '100%',
+//         height: '100%',
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//       }}
+//     >
+//       <img style={{ width: 'min(45vw,80vh)', height: 'min(45vw,80vh)' }} src={placeholderSrc} />
+//     </div>
+//   )
+
+//   return (
+//     <div
+//       style={{
+//         display: 'flex',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         height: '100%',
+//       }}
+//     >
+//       <div
+//         style={{
+//           height: 'min(75vw, 75vh)',
+//           width: 'min(75vw, 75vh)',
+//           display: 'grid',
+//           gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+//           gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
+//           columnGap: '15px',
+//           rowGap: '15px',
+//         }}
+//       >
+//         {Array(25)
+//           .fill(null)
+//           .map((_) => (
+//             <div
+//               style={{
+//                 background: `var(--placeholder-gradient)`,
+//                 animation: 'loading 2s ease infinite',
+//                 backgroundSize: '200% 200%',
+//               }}
+//             />
+//           ))}
+//       </div>
+//     </div>
+//   )
+// }
 
 function GenerativeSketch(props: GenerativeSketchProps) {
   const options = { ...props, auto: true }
@@ -79,8 +131,8 @@ function GenerativeSketch(props: GenerativeSketchProps) {
         >
           <div
             style={{
-              height: isSmallScreen ? '20rem' : 'min(45vw, 90vh)',
-              width: isSmallScreen ? '20rem' : 'max(45vw, 75vh)',
+              height: isSmallScreen ? '20rem' : null,
+              width: isSmallScreen ? '20rem' : 'max(calc(50% - 3rem), calc(100vh - 6rem))',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
               gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
@@ -97,7 +149,6 @@ function GenerativeSketch(props: GenerativeSketchProps) {
           </div>
         </div>
       )}
-
       <div
         style={{
           width: '100%',
