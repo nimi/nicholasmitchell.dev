@@ -1,0 +1,89 @@
+---
+import Warp from '../lib/warp';
+
+const {colors = ['blue']} = Astro.props;
+
+// Line
+const d = "M 2,2 L 24,2"
+
+const getPathString = (fn) => {
+  const warp = new Warp(d)
+  warp.interpolate(4)
+  let [newPathString] = warp.transform(([ x, y ]) => [ x, y + 4 * Math[fn](x / 8) ])
+  return newPathString
+}
+
+---
+
+<div class="links">
+  <div>
+    <a href="https://github.com/nimi">
+      <svg style={`--path-color: ${colors[2]};`} viewBox="-2 -1 30 12">
+        <path id="github" d={getPathString('sin')}></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#github" startOffset="5">
+            GitHub
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <div>
+    <a href="https://twitter.com/nicklmitch">
+      <svg style={`--path-color: ${colors[4]};`} viewBox="-2 -4 30 12">
+        <path id="twitter" d="M2 2.98 L4.75 1.91 7.5 1.06 10.25 0.34 13 0.02 15.75 0 18.5 0.5 21.25 1.23 24 2.56"></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#twitter" startOffset="6">
+            Twitter
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <div>
+    <a href="https://linkedin.com/in/nicholaslmitchell/">
+      <svg style={`--path-color: ${colors[0]};`} viewBox="-2 -1 30 12">
+        <path id="linkedin" d={getPathString('sin')}></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#linkedin" startOffset="5">
+            LinkedIn
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style>
+  .links {
+    display: flex;
+    padding: 0 10rem;
+    height: 10rem;
+  }
+
+  .links div {
+    flex: 1;
+    padding: 0.5rem;
+  }
+
+  .links a:hover {
+    filter: brightness(1.5);
+  }
+
+  .links div:nth-of-type(odd) {
+    transform: translateY(4rem);
+  }
+
+  text {
+    fill: white;
+    font-size: 0.25rem;
+    text-align: center;
+  }
+
+  path {
+    stroke: var(--path-color);
+    stroke-width: 6px;
+    stroke-linecap: round;
+    fill: none;
+  }
+</style>
