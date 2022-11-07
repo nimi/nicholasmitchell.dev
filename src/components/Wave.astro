@@ -1,0 +1,28 @@
+---
+import Warp from '../lib/warp';
+
+const {color = 'blue'} = Astro.props;
+
+// Line
+const d = "M 2,2 L 124,2"
+const warp = new Warp(d)
+
+warp.interpolate(4)
+let [newPathString] = warp.transform(([ x, y ]) => [ x, y + 4 * Math.sin(x / 8) ])
+
+---
+
+<svg style={`--path-color: ${color};`} viewBox="0 -4 126 14"> <path d={newPathString}></path></svg>
+
+<style>
+  svg {
+    position: relative;
+  }
+
+  path {
+    stroke: var(--path-color);
+    stroke-width: 4px;
+    stroke-linecap: round;
+    fill: none;
+  }
+</style>

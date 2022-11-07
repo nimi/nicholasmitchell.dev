@@ -1,0 +1,98 @@
+---
+import Warp from '../lib/warp';
+
+const {colors = ['blue']} = Astro.props;
+
+// Line
+const d = "M 2,2 L 24,2"
+
+const getPathString = (fn) => {
+  const warp = new Warp(d)
+  warp.interpolate(4)
+  let [newPathString] = warp.transform(([ x, y ]) => [ x, y + 4 * Math[fn](x / 8) ])
+  return newPathString
+}
+
+---
+
+<div class="social-links">
+  <div>
+    <a href="https://github.com/nimi">
+      <svg style={`--path-color: ${colors[2]};`} viewBox="-2 -1 30 12">
+        <path id="github" d={getPathString('sin')}></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#github" startOffset="5">
+            GitHub
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <div>
+    <a href="https://twitter.com/nicklmitch">
+      <svg style={`--path-color: ${colors[4]};`} viewBox="-2 -4 30 12">
+        <path id="twitter" d="M2 2.98 L4.75 1.91 7.5 1.06 10.25 0.34 13 0.02 15.75 0 18.5 0.5 21.25 1.23 24 2.56"></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#twitter" startOffset="6">
+            Twitter
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <div>
+    <a href="https://linkedin.com/in/nicholaslmitchell/">
+      <svg style={`--path-color: ${colors[0]};`} viewBox="-2 -1 30 12">
+        <path id="linkedin" d={getPathString('sin')}></path>
+        <text  width="100">
+          <textPath alignment-baseline="central" href="#linkedin" startOffset="5">
+            LinkedIn
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<style global>
+  .social-links {
+    display: flex;
+    padding: 0;
+    height: 4rem;
+    container-name: links;
+    container-type: inline-size;
+  }
+
+  .social-links div {
+    flex: 1;
+    padding: 0.5rem;
+  }
+
+  .social-links a:hover {
+    filter: brightness(1.5);
+  }
+
+  .social-links div:nth-of-type(odd) {
+    transform: translateY(3.5rem);
+  }
+
+  .social-links text {
+    fill: white;
+    font-size: 0.25rem;
+    text-align: center;
+  }
+
+  .social-links path {
+    stroke: var(--path-color);
+    stroke-width: 6px;
+    stroke-linecap: round;
+    fill: none;
+  }
+
+  @media (min-width: 58rem) {
+    .social-links {
+      padding: 1rem 10rem;
+      height: 10rem;
+    }
+  }
+</style>
