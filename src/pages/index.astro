@@ -1,8 +1,17 @@
 ---
 // Component Imports
 import BaseHead from '../components/BaseHead.astro';
-import GenerativeSketch from '../components/GenerativeSketch/GenerativeSketch.tsx'
-import PalettePicker from '../components/PalettePicker/PalettePicker.tsx'
+import NameImage from '../components/NameImage.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import AvatarImage from '../components/AvatarImage.astro';
+import Wave from '../components/Wave.astro';
+import palette from '../lib/palette';
+
+const colors = palette.find(p => p.name === 'roygbiv-warm').colors;
+const altColors = palette.find(p => p.name === 'present-correct').colors;
+const month = new Date().getMonth();
+const day = new Date().getDate();
+const year = new Date().getFullYear();
 
 let title = 'Nicholas Mitchell | Frontend Engineer 🏄🏻‍♂️';
 let description = 'Hi 👋🏻! Welcome to my personal website. Thanks for stopping by';
@@ -12,9 +21,28 @@ let permalink = 'https://nicholasmitchell.dev/';
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <style>
+    <style global>
+      /* Tokens */
+      :root {
+        --text-color: black;
+        --background-color: white;
+        --link-hover-color: #841578;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text-color: white;
+          --background-color: #121111;
+          --link-hover-color: #d49dce;
+        }
+      }
+    </style>
+    <style global>
+            /* Reset */
       html,
       body,
       div,
@@ -142,10 +170,24 @@ let permalink = 'https://nicholasmitchell.dev/';
       * {
         box-sizing: border-box;
       }
+      /* End Reset */
 
+      /*  Utilties */
+      .sr-only:not(:focus):not(:active) {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+      /* End Utilties */
+
+      /* Page Styles */
       html {
         height: 100%;
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: 'Karla', -apple-system, BlinkMacSystemFont, helvetica, arial, sans-serif;
         font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0,
           'dlig' 1;
       }
@@ -153,19 +195,16 @@ let permalink = 'https://nicholasmitchell.dev/';
       body {
         margin: 0;
         padding: 0;
-        min-height: 100%;
+        height: 100%;
         min-width: 100%;
-      }
-
-      #___gatsby #gatsby-focus-wrapper {
-        min-height: 100vh;
-        min-width: 100vw;
+        font-size: 18px;
+        color: var(--text-color);
+        background-color: var(--background-color);
       }
 
       a {
         color: inherit;
       }
-
       a:hover {
         color: var(--link-hover-color);
       }
@@ -173,317 +212,344 @@ let permalink = 'https://nicholasmitchell.dev/';
       main {
         min-height: 100vh;
         min-width: 100vw;
-        display: flex;
-        padding: 0px;
+        padding: 0 2rem 2rem;
+        container-type: inline-size;
+        container-name: main;
       }
 
-      h1 {
-        font-size: 6vw;
-        line-height: 9.5vw;
-        padding: 6vw 15vw 0 11vw;
+      footer {
+        container-type: inline-size;
+        container-name: footer;
       }
 
-      .home {
-        height: 100vh;
-        position: relative;
-        width: 100%;
-      }
-
-      .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: var(--background-color);
-      }
-
-      .container.second h1 {
-        display: none;
-      }
-
-      .home {
-        display: grid;
-        grid-template-columns: 100%;
-      }
-
-      .home-palette-picker {
-        display: none;
-      }
-
-      .home-controls {
-        display: flex;
-      }
-
-      .home-link-list {
-        display: flex;
-        margin: 8vw;
-        justify-content: space-around;
-        width: 100%;
-      }
-
-      .home-link-list > a {
-        font-size: 5vw;
-      }
-
-      .home-generative-sketch {
-        padding: 10vw;
-        height: 100%;
-      }
-
-      @media (min-width: 68em) {
-        h1 {
-          font-size: 3vw;
-          line-height: 3.5vw;
-          padding: 2vw 2vw 0 2vw;
-        }
-
-        .home {
-          display: grid;
-          grid-template-columns: 50% 1fr;
-        }
-
-        .home-generative-sketch {
+      @media (min-width: 58em) {
+        main {
           padding: 0;
         }
 
-        .container-mobile {
-          display: none;
+        section {
+          max-width: 900px;
+          margin: 4rem auto;
+        }
+      }
+
+      /* Introduction */
+      header {
+        padding: 4rem 2rem;
+        container-type: inline-size;
+        container-name: header;
+      }
+
+      header .header-image {
+        margin-bottom: 3rem;
+      }
+
+      header .subtitle br {
+        display: none;
+      }
+
+      .subtitle {
+        background-color: #201b23;
+        border-radius: 88px;
+        font-size: 1rem;
+        padding: 2rem 1.5rem;
+        line-height: 1.7;
+        margin-bottom: 1.8rem;
+        margin-top: 1.5rem;
+        text-align: center;
+      }
+
+      @media (min-width: 58em) {
+        header {
+          padding: 0rem 2rem;
+          max-width: 900px;
+          margin: 4rem auto;
+          margin: 10rem auto 0rem;
+        }
+      }
+
+      @media (min-width: 58em) {
+        .header-image {
+          padding: 0rem 2rem;
+          margin-bottom: 4rem;
         }
 
-        .container.first {
-          background-color: black;
+        .subtitle {
+          padding: 2rem;
+          font-size: 1.2rem;
+          line-height: 1.9;
         }
 
-        .container.second h1 {
+        .subtitle br {
           display: block;
         }
+      }
 
-        .home-palette-picker {
+      /* About */
+      .about {
+        background-color: hsl(46deg 53% 39% / 26%);
+        color: hsl(44deg 85% 43%);
+        border-radius: 88px;
+        padding: 3rem 3rem;
+        font-size: 1.2rem;
+        line-height: 1.9;
+        margin-bottom: 1.8rem;
+        margin-top: 1.5rem;
+        transition: background-color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53),color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53);
+      }
+
+      .about p {
+        margin-bottom: 1.5rem;
+      }
+
+      [data-scroll='0'] .about,
+      [data-scroll='400'] .about {
+        background-color: hsl(46deg 53% 39% / 26%) !important;
+        color: hsl(44deg 85% 43%) !important;
+      }
+
+      [data-scroll='800'] .about {
+        background-color: rgba(152, 47, 112, 0.26) !important;
+        color: rgb(203, 16, 116) !important;
+      }
+
+      [data-scroll]:where(:not([data-scroll='0']), :not([data-scroll='400']), :not([data-scroll='800'])) .about {
+        background-color: rgba(141, 47, 152, 0.26);
+        color: rgb(159, 16, 203);
+      }
+
+      @container main (min-width: 58em) {
+        .about {
+          padding: 4rem;
+        }
+      }
+
+      /* Projects */
+      .projects {
           display: flex;
           flex-direction: column;
-          justify-content: flex-end;
-          padding: 2vw;
-
-          position: relative;
-        }
-
-        .home-link-list {
-          justify-content: flex-end;
-          display: flex;
-          flex-direction: column;
-          padding: 2vw;
-          margin: 0;
-
-          height: 100%;
-          width: 100%;
-        }
-
-        .home-link-list > a {
-          font-size: 2vw;
-          line-height: 3.5vw;
-        }
-      }
-    </style>
-
-    <style global>
-      :root {
-        --text-color: black;
-        --background-color: white;
-        --link-hover-color: #841578;
-        --placeholder-gradient: linear-gradient(-1deg, #2c2c2c, #262626);
+          gap: 1.5rem;
       }
 
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --text-color: white;
-          --background-color: #333333;
-          --link-hover-color: #d49dce;
-        }
-      }
-
-      @media (max-width: 68em) {
-        :root {
-          --placeholder-gradient: linear-gradient(-1deg, #2c2c2c, #262626);
-        }
-      }
-
-      @media (max-width: 68em) and (prefers-color-scheme: dark) {
-        :root {
-          --placeholder-gradient: linear-gradient(-1deg, #3c3c3c, #505050);
-        }
-      }
-
-      body {
-        color: var(--text-color);
-        background-color: var(--background-color);
-      }
-
-      .modal-wrapper {
-        background-color: transparent;
-
-        border-radius: 3px;
-
-        overflow: auto;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-
-        height: 100vh;
-        width: 100%;
-        min-width: 490px;
-      }
-
-      .modal-backdrop {
-        background-color: rgba(0, 0, 0, 0.45);
-
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 1;
-
-        height: 100vh;
-        width: 100%;
-      }
-
-      .modal-close-button {
-        color: var(--text-color);
-        background: none;
-        border: none;
-        outline: 0;
-        cursor: pointer;
-        position: absolute;
-        right: 4px;
-        top: 1.2rem;
-      }
-
-      .modal-close-button:focus {
-        box-shadow: 0 0 0 2px var(--text-color);
-      }
-
-      .palette-picker {
+      .project {
+        --project-item-color: rgb(57, 154, 167);
+        text-decoration: none;
         display: flex;
         flex-direction: column;
-        -webkit-box-pack: end;
-        justify-content: flex-end;
-        padding: 2vw;
-        position: relative;
-      }
-
-      .palette-picker-bar-list {
-        display: flex;
-        padding: 0px 20px;
-        width: 100px;
-        justify-content: space-around;
-      }
-
-      .palette-picker-item {
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-
-      .palette-picker-item:hover {
-        border: solid var(--text-color) 10px !important;
-      }
-
-      @-webkit-keyframes loading {
-        0%{background-position:10% 0%}
-        50%{background-position:91% 100%}
-        100%{background-position:10% 0%}
-      }
-      @-moz-keyframes loading {
-        0%{background-position:10% 0%}
-        50%{background-position:91% 100%}
-        100%{background-position:10% 0%}
-      }
-      @keyframes loading {
-        0%{background-position:10% 0%}
-        50%{background-position:91% 100%}
-        100%{background-position:10% 0%}
-      }
-
-      .wrapper {
-        position: relative;
-        height: 100%;
-      }
-
-      .wrapper > .placeholder {
-        display: flex;
-        align-items: center;
         justify-content: center;
-        height: calc(100vh - 6rem);
-        padding: 3rem;
+        color: var(--project-item-color);
+        border: solid 4px var(--project-item-color);
+        border-radius: 88px;
+        padding: 4rem 4rem;
+        font-size: 1.4rem;
+        line-height: 1.9;
+        text-align: center;
       }
 
-      .wrapper > .placeholder > div {
-        width: max(calc(50% - 3rem), calc(100vh - 6rem));
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        column-gap: 15px;
-        row-gap: 15px;
+      .project span {
+        font-size: 1rem;
       }
 
-      @media (max-width: 68em) {
-        .wrapper {
-          height: 20rem;
+      .project:hover {
+        --project-item-color: var(--link-hover-color) !important;
+      }
+
+      .project:nth-of-type(2) {
+        --project-item-color: rgb(16, 203, 172);
+      }
+
+      .project:nth-of-type(3) {
+        --project-item-color: rgb(35, 197, 116);
+      }
+
+      .project:nth-of-type(4) {
+        --project-item-color: rgb(135, 182, 94);
+      }
+
+      .project:nth-of-type(1) {
+        grid-area: a;
+      }
+
+      .project:nth-of-type(2) {
+        grid-area: b;
+      }
+
+      .project:nth-of-type(3) {
+        grid-area: c;
+      }
+
+      .project:nth-of-type(4) {
+        grid-area: d;
+      }
+
+      @container main (min-width: 58em) {
+        .projects {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr;
+          /* grid-auto-flow: column dense; */
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 2rem;
+          transition: grid-template-columns cubic-bezier(0.23, 1, 0.320, 1) 0.25s, grid-template-rows cubic-bezier(0.23, 1, 0.320, 1) 0.25s;
+          will-change: grid-template-columns, grid-template-rows;
+          grid-template-areas:
+            "a b"
+            "c d";
         }
+      }
 
-        .wrapper > .placeholder {
-          height: 20rem;
-          padding: 0;
-        }
+      .waves {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        filter: brightness(0.4);
+        justify-content: center;
+        max-width: 56rem;
+        text-align: center;
+        font-size: 2.5rem;
+        width: 100%;
+      }
 
-        .wrapper > .placeholder > div {
-          height: 20rem;
-          width: 20rem;
+      .waves:nth-of-type(1) {
+        margin-bottom: 2rem;
+      }
+
+      .waves:nth-of-type(2) {
+        transform: rotate(180deg);
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      @container main (min-width: 58em) {
+        .waves {
+          margin: 4rem auto 0;
         }
       }
 
-      .placeholder-block {
-        aspect-ratio: 1;
-        background: var(--placeholder-gradient);
-        animation: loading 2s ease infinite;
-        background-size: 200% 200%;
+      footer {
+        text-align: center;
+        line-height: 1.9;
+        height: 8rem;
+        background-color: #201b23;
+        font-size: 0.8rem;
+        padding-top: 2rem;
       }
+
+      /* End Page Styles */
+    </style>
+    <style>
     </style>
   </head>
 
   <body>
-    <div class="layout">
-      <main>
-        <div class="home">
-          <div class="container-mobile">
-            <h1>
-              Hi, I'm Nicholas. I'm a software engineer, listener, thinker, and problem solver.
-              Currently, I'm working with <a href="https://www.netlify.com">Netlify</a> to help make apps
-              and websites faster, more secure and scalable.
-            </h1>
-          </div>
-          <div class="container first">
-            <div class="home-generative-sketch">
-              <GenerativeSketch client:load />
-            </div>
-          </div>
-          <div class="container second">
-            <h1>
-              Hi, I'm Nicholas. I'm a software engineer, listener, thinker, and problem solver.
-              Currently, I'm working with <a href="https://www.netlify.com">Netlify</a> to help make apps
-              and websites faster, more secure and scalable.
-            </h1>
-            <div class="home-controls">
-              <div class="home-link-list" role="navigation">
-                <a href="https://github.com/nimi">Work</a>
-                <a href="https://twitter.com/nicklmitch">Twitter</a>
-                <a href="https://linkedin.com/in/nicholaslmitchell/">Contact</a>
-              </div>
-              <div class="home-palette-picker">
-                <PalettePicker client:media={'(min-width: 68em)'} />
-              </div>
-            </div>
-          </div>
+    <header class="introduction">
+      <div class="header-content">
+        <div class="header-image">
+          <NameImage />
         </div>
-      </main>
-    </div>
+        <h1 class="sr-only">Nicholas Mitchell</h1>
+        <div class="subtitle">
+          <p>
+            Hey 👋! I'm a Staff Frontend Engineer based out of Austin, Texas.
+            <br>Currently, I work remotely building next-gen o11y software with Cribl. Previously, Engineering Manager and Engineer at Netlify, Frontend at Shogun, SailPoint and IBM IX.
+          </p>
+        </div>
+        <SocialLinks colors={colors} />
+      </div>
+    </header>
+    <main>
+      <section class="about">
+        <h2 class="sr-only">About</h2>
+        <AvatarImage />
+        <p>
+          I'm a frontend engineer and engineering leader that loves building products that make people's lives easier and joyful. I'm particularly passionate about the space between code and design, developer experience, and building products that are inclusive and accessible.
+        </p>
+        <p>
+          I've worked in a wide variety of domains, from enterprise software to consumer products. I've worked on a variety of teams, from small startups to large enterprises. I've worked on a variety of products, from frontend developer tools to marketing sites to enterprise software.
+        </p>
+        <p>
+          I cut my teeth on HTML, CSS, PHP and MySQL when I was in high school, long before anyone had ever heard the term "Frontend Engineer". I meanandered through college, getting into Art History and attending DIY and experimental house shows in Columbus, Ohio. I eventually found my way to the University of Texas at Austin, where I studied at the School of Information. From that point on, I became obsessed with frontend technologies and building software for the web.
+        </p>
+        <p>
+          Through my experience working a variety of teams and getting to know the people using the software we built along with many lessons learned in school and in life, I've come to believe that the best approach is to follow a few simple rules. Have empathy for your users, be kind to your colleagues, and never stop learning new things. Those three things will get you very far. One more thing, don't forget to have fun! Problems will be constant, but the joy you get from solving them will be fleeting. Don't forget to enjoy the ride 🎢.
+        </p>
+        <p>
+          Outside, of work and my career, I like to spend time my partner Beth and our daughter Ramona. As a family, we enjoy traveling to new places, playing board games, and watching movies. I enjoy listening to a bunch of different kinds of music, reading, playing around with synthesizers and vintage keyboards, skateboarding and drawing.
+        </p>
+      </section>
+
+      <div class="waves">
+        <Wave color={altColors[9]} />
+        <Wave color={altColors[11]} />
+        <Wave color={altColors[13]} />
+      </div>
+      <section class="projects">
+        <h2 class="sr-only">Projects</h2>
+        <a href="https://oldmanyellsat.netlify.app" class="project">
+          Meme Generator ↗
+          <span>Old man yells at cloud</span>
+        </a>
+        <a href="https://frontend.chat" class="project">
+          Frontend Chat ↗
+          <span>Discover frontend chat communities</span>
+        </a>
+        <a href="https://cuuute.netlify.app" class="project">
+          Cuuuute ↗
+
+          <span>A cute animal for every PR</span>
+        </a>
+        <a href="https://cymharu.netlify.app" class="project">
+          Cymharu ↗
+
+          <span>Compare city data side-by-side</span>
+        </a>
+      </section>
+      <div class="waves">
+        <Wave color={altColors[16]} />
+        <Wave color={altColors[15]} />
+        <Wave color={altColors[13]} />
+      </div>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>
+          Built with <a href="https://astro.build">Astro</a> and <a href="https://netlify.com">Netlify</a>.
+        </p>
+        <p>
+          This page was last built on {`${month + 1}/${day}/${year}`} by <a href="https://nicholasmitchell.dev">Nicholas Mitchell</a>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
+
+<script>
+  const debounce = (fn) => {
+    let frame;
+    return (...params) => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+      frame = requestAnimationFrame(() => {
+        fn(...params);
+      });
+    }
+  };
+
+  const storeScroll = () => {
+    const position = (Math.ceil(window.scrollY / 400) * 400).toString();
+    document.documentElement.dataset.scroll = position;
+  }
+
+  const main = () => {
+    document.addEventListener('scroll', debounce(storeScroll), { passive: true });
+
+    storeScroll();
+
+    window.history.scrollRestoration = 'auto'
+  }
+
+  main()
+
+</script>

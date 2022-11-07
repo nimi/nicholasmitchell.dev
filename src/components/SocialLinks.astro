@@ -15,7 +15,7 @@ const getPathString = (fn) => {
 
 ---
 
-<div class="links">
+<div class="social-links">
   <div>
     <a href="https://github.com/nimi">
       <svg style={`--path-color: ${colors[2]};`} viewBox="-2 -1 30 12">
@@ -54,36 +54,45 @@ const getPathString = (fn) => {
   </div>
 </div>
 
-<style>
-  .links {
+<style global>
+  .social-links {
     display: flex;
-    padding: 0 10rem;
-    height: 10rem;
+    padding: 0;
+    height: 4rem;
+    container-name: links;
+    container-type: inline-size;
   }
 
-  .links div {
+  .social-links div {
     flex: 1;
     padding: 0.5rem;
   }
 
-  .links a:hover {
+  .social-links a:hover {
     filter: brightness(1.5);
   }
 
-  .links div:nth-of-type(odd) {
-    transform: translateY(4rem);
+  .social-links div:nth-of-type(odd) {
+    transform: translateY(3.5rem);
   }
 
-  text {
+  .social-links text {
     fill: white;
     font-size: 0.25rem;
     text-align: center;
   }
 
-  path {
+  .social-links path {
     stroke: var(--path-color);
     stroke-width: 6px;
     stroke-linecap: round;
     fill: none;
+  }
+
+  @media (min-width: 58rem) {
+    .social-links {
+      padding: 1rem 10rem;
+      height: 10rem;
+    }
   }
 </style>

@@ -138,16 +138,24 @@ const { bgColor = 'currentColor' } = Astro.props
 <style>
   .avatar {
     background-color: var(--avatar-bg-color);
-    width: 8rem;
-    height: 8rem;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     overflow: hidden;
     float: left;
-    margin-right: 1.5em;
+    margin-right: 1rem;
     shape-outside: margin-box;
   }
   svg {
     width: 100%;
     height: 100%;
+  }
+
+  @media (min-width: 68em) {
+    .avatar {
+      width: 8rem;
+      height: 8rem;
+      margin-right: 1.5rem;
+    }
   }
 </style>

@@ -12,12 +12,11 @@ let [newPathString] = warp.transform(([ x, y ]) => [ x, y + 4 * Math.sin(x / 8) 
 
 ---
 
-<svg style={`--path-color: ${color};`} viewBox="0 -4 136 14"> <path d={newPathString}></path></svg>
+<svg style={`--path-color: ${color};`} viewBox="0 -4 126 14"> <path d={newPathString}></path></svg>
 
 <style>
   svg {
     position: relative;
-    transform: rotate(90deg);
   }
 
   path {
