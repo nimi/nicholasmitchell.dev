@@ -21,11 +21,26 @@ let permalink = 'https://nicholasmitchell.dev/';
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700;900&display=swap" rel="stylesheet">
 
     <style global>
+      /* Fonts */
+      @font-face {
+        font-family: 'Karla';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(/fonts/karla.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Karla';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url(/fonts/karla.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
       /* Tokens */
       :root {
         /* --text-color: black;
@@ -34,6 +49,7 @@ let permalink = 'https://nicholasmitchell.dev/';
         --text-color: white;
         --background-color: #121111;
         --link-hover-color: #d49dce;
+        --link-hover-gradient: #f6e5f4, #d49dce;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -243,11 +259,11 @@ let permalink = 'https://nicholasmitchell.dev/';
         container-name: header;
       }
 
-      header .header-image {
+      .header-image {
         margin-bottom: 3rem;
       }
 
-      header .subtitle br {
+      .subtitle br {
         display: none;
       }
 
@@ -334,14 +350,46 @@ let permalink = 'https://nicholasmitchell.dev/';
           gap: 1.5rem;
       }
 
+
+      /* .projects .project {
+        -webkit-mask: var(--full) text, var(--full) padding-box, var(--full);
+        -webkit-mask-composite: xor;
+      } */
+
+      .projects .project {
+        position: relative;
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+      .projects .project::before {
+        position: absolute;
+        inset: -0.25em;
+        border: inherit;
+        border-radius: inherit;
+        background: inherit;
+        background-clip: border-box;
+        -webkit-mask: var(--full) padding-box, var(--full);
+        -webkit-mask-composite: xor;
+        mask: var(--full) padding-box exclude, var(--full);
+        content: "";
+      }
+      .project::after {
+        content: attr(data-ico);
+      }
+
+
       .project {
         --project-item-color: rgb(57, 154, 167);
+        --project-item-gradient-colors: rgb(184, 216, 220), rgb(39, 118, 120);
+        --full: linear-gradient(red 0 0);
+        --grad: linear-gradient(to right bottom, var(--project-item-gradient-colors));
+        border: solid 0.25em transparent;
+        background: var(--grad) border-box;
+        -webkit-text-fill-color: transparent;
         text-decoration: none;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        color: var(--project-item-color);
-        border: solid 4px var(--project-item-color);
         border-radius: 88px;
         padding: 4rem 4rem;
         font-size: 1.4rem;
@@ -353,20 +401,24 @@ let permalink = 'https://nicholasmitchell.dev/';
         font-size: 1rem;
       }
 
-      .project:hover {
+      .project.project:hover {
         --project-item-color: var(--link-hover-color) !important;
+        --project-item-gradient-colors: var(--link-hover-gradient);
       }
 
       .project:nth-of-type(2) {
         --project-item-color: rgb(16, 203, 172);
+        --project-item-gradient-colors: rgb(173, 221, 213), rgb(16, 203, 172);
       }
 
       .project:nth-of-type(3) {
-        --project-item-color: rgb(35, 197, 116);
+        --project-item-color: rgb(129, 192, 160);
+         --project-item-gradient-colors: rgb(138, 194, 166), rgb(35, 197, 116);
       }
 
       .project:nth-of-type(4) {
-        --project-item-color: rgb(135, 182, 94);
+        --project-item-color: rgb(189, 214, 167);
+         --project-item-gradient-colors: rgb(199, 215, 185), rgb(135, 182, 94);
       }
 
       .project:nth-of-type(1) {
@@ -409,6 +461,7 @@ let permalink = 'https://nicholasmitchell.dev/';
         filter: brightness(0.4);
         justify-content: center;
         max-width: 56rem;
+        margin: 4rem auto;
         text-align: center;
         font-size: 2.5rem;
         width: 100%;
@@ -440,8 +493,6 @@ let permalink = 'https://nicholasmitchell.dev/';
       }
 
       /* End Page Styles */
-    </style>
-    <style>
     </style>
   </head>
 
