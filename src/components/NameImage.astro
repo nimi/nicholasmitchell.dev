@@ -54,8 +54,14 @@ let gradientStops = [
   }
 
   svg g {
-    stroke-width: 4px;
+    stroke-width: 2px;
     stroke: url(#gradient);
     fill: transparent;
+  }
+
+  @media (min-width: 58em) {
+    svg g {
+      stroke-width: 4px;
+    }
   }
 </style>
