@@ -1,8 +1,8 @@
 {
-  "name": "nicholasmitchell.me",
-  "description": "Personal website and blog for Nicholas Mitchell",
+  "name": "nicomitchell.com",
+  "description": "Personal website and blog for Nico Mitchell",
   "version": "2.0.0",
-  "author": "Nicholas Mitchell <mitchellnicholasl@gmail.com>",
+  "author": "Nico Mitchell <heynicomitchell@gmail.com>",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

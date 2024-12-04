@@ -1,24 +1,24 @@
 ---
 // Component Imports
-import BaseHead from '../components/BaseHead.astro';
-import NameImage from '../components/NameImage.astro';
-import SocialLinks from '../components/SocialLinks.astro';
-import AvatarImage from '../components/AvatarImage.astro';
-import Wave from '../components/Wave.astro';
-import palette from '../lib/palette';
+import BaseHead from '../components/BaseHead.astro'
+import NameImage from '../components/NameImage.astro'
+import SocialLinks from '../components/SocialLinks.astro'
+import AvatarImage from '../components/AvatarImage.astro'
+import Wave from '../components/Wave.astro'
+import palette from '../lib/palette'
 
-const colors = palette.find(p => p.name === 'roygbiv-warm').colors;
-const altColors = palette.find(p => p.name === 'present-correct').colors;
-const month = new Date().getMonth();
-const day = new Date().getDate();
-const year = new Date().getFullYear();
+const colors = palette.find((p) => p.name === 'roygbiv-warm').colors
+const altColors = palette.find((p) => p.name === 'present-correct').colors
+const month = new Date().getMonth()
+const day = new Date().getDate()
+const year = new Date().getFullYear()
 
-let title = 'Nicholas Mitchell | Frontend Engineer 🏄🏻‍♂️';
-let description = 'Hi 👋🏻! Welcome to my personal website. Thanks for stopping by';
-let permalink = 'https://nicholasmitchell.dev/';
-
+let title = 'Nico Mitchell | Frontend Engineer 🏄🏻‍♂️'
+let description = 'Hi 👋🏻! Welcome to my personal website. Thanks for stopping by'
+let permalink = 'https://nicomitchell.com/'
 ---
-<html lang="en">
+
+<html lang='en'>
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
 
@@ -30,7 +30,8 @@ let permalink = 'https://nicholasmitchell.dev/';
         font-weight: 400;
         font-display: swap;
         src: url(/fonts/karla.woff2) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
       @font-face {
         font-family: 'Karla';
@@ -38,7 +39,8 @@ let permalink = 'https://nicholasmitchell.dev/';
         font-weight: 700;
         font-display: swap;
         src: url(/fonts/karla.woff2) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
 
       /* Tokens */
@@ -61,7 +63,7 @@ let permalink = 'https://nicholasmitchell.dev/';
       }
     </style>
     <style global>
-            /* Reset */
+      /* Reset */
       html,
       body,
       div,
@@ -206,8 +208,21 @@ let permalink = 'https://nicholasmitchell.dev/';
       /* Page Styles */
       html {
         height: 100%;
-        font-family: 'Karla', -apple-system, BlinkMacSystemFont, helvetica, arial, sans-serif;
-        font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0,
+        font-family:
+          'Karla',
+          -apple-system,
+          BlinkMacSystemFont,
+          helvetica,
+          arial,
+          sans-serif;
+        font-feature-settings:
+          'kern' 1,
+          'liga' 1,
+          'calt' 1,
+          'pnum' 1,
+          'tnum' 0,
+          'onum' 1,
+          'lnum' 0,
           'dlig' 1;
       }
 
@@ -314,7 +329,9 @@ let permalink = 'https://nicholasmitchell.dev/';
         line-height: 1.9;
         margin-bottom: 1.8rem;
         margin-top: 1.5rem;
-        transition: background-color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53),color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53);
+        transition:
+          background-color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53),
+          color 0.4s cubic-bezier(0.55, 0.09, 0.68, 0.53);
       }
 
       .about p {
@@ -332,7 +349,12 @@ let permalink = 'https://nicholasmitchell.dev/';
         color: rgb(203, 16, 116) !important;
       }
 
-      [data-scroll]:where(:not([data-scroll='0']), :not([data-scroll='400']), :not([data-scroll='800'])) .about {
+      [data-scroll]:where(
+          :not([data-scroll='0']),
+          :not([data-scroll='400']),
+          :not([data-scroll='800'])
+        )
+        .about {
         background-color: rgba(141, 47, 152, 0.26);
         color: rgb(159, 16, 203);
       }
@@ -345,17 +367,10 @@ let permalink = 'https://nicholasmitchell.dev/';
 
       /* Projects */
       .projects {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
-
-
-      /* .projects .project {
-        -webkit-mask: var(--full) text, var(--full) padding-box, var(--full);
-        -webkit-mask-composite: xor;
-      } */
-
       .projects .project {
         position: relative;
         -webkit-background-clip: text;
@@ -368,15 +383,18 @@ let permalink = 'https://nicholasmitchell.dev/';
         border-radius: inherit;
         background: inherit;
         background-clip: border-box;
-        -webkit-mask: var(--full) padding-box, var(--full);
+        -webkit-mask:
+          var(--full) padding-box,
+          var(--full);
         -webkit-mask-composite: xor;
-        mask: var(--full) padding-box exclude, var(--full);
-        content: "";
+        mask:
+          var(--full) padding-box exclude,
+          var(--full);
+        content: '';
       }
       .project::after {
         content: attr(data-ico);
       }
-
 
       .project {
         --project-item-color: rgb(57, 154, 167);
@@ -413,12 +431,12 @@ let permalink = 'https://nicholasmitchell.dev/';
 
       .project:nth-of-type(3) {
         --project-item-color: rgb(129, 192, 160);
-         --project-item-gradient-colors: rgb(138, 194, 166), rgb(35, 197, 116);
+        --project-item-gradient-colors: rgb(138, 194, 166), rgb(35, 197, 116);
       }
 
       .project:nth-of-type(4) {
         --project-item-color: rgb(189, 214, 167);
-         --project-item-gradient-colors: rgb(199, 215, 185), rgb(135, 182, 94);
+        --project-item-gradient-colors: rgb(199, 215, 185), rgb(135, 182, 94);
       }
 
       .project:nth-of-type(1) {
@@ -446,11 +464,13 @@ let permalink = 'https://nicholasmitchell.dev/';
           justify-content: center;
           flex-wrap: wrap;
           gap: 2rem;
-          transition: grid-template-columns cubic-bezier(0.23, 1, 0.320, 1) 0.25s, grid-template-rows cubic-bezier(0.23, 1, 0.320, 1) 0.25s;
+          transition:
+            grid-template-columns cubic-bezier(0.23, 1, 0.32, 1) 0.25s,
+            grid-template-rows cubic-bezier(0.23, 1, 0.32, 1) 0.25s;
           will-change: grid-template-columns, grid-template-rows;
           grid-template-areas:
-            "a b"
-            "c d";
+            'a b'
+            'c d';
         }
       }
 
@@ -497,81 +517,106 @@ let permalink = 'https://nicholasmitchell.dev/';
   </head>
 
   <body>
-    <header class="introduction">
-      <div class="header-content">
-        <div class="header-image">
+    <header class='introduction'>
+      <div class='header-content'>
+        <div class='header-image'>
           <NameImage />
         </div>
-        <h1 class="sr-only">Nicholas Mitchell</h1>
-        <div class="subtitle">
+        <h1 class='sr-only'>Nico Mitchell</h1>
+        <div class='subtitle'>
           <p>
             Hey 👋! I'm a Staff Frontend Engineer based out of Ann Arbor, Michigan.
-            <br>Currently, I work remotely building next-gen o11y software with Cribl. Previously, Engineering Manager and Engineer at Netlify, Frontend at Shogun, SailPoint and IBM IX.
+            <br />Currently, I work remotely building next-gen o11y software with Cribl. Previously,
+            Engineering Manager and Engineer at Netlify, Frontend at Shogun, SailPoint and IBM IX.
           </p>
         </div>
         <SocialLinks colors={colors} />
       </div>
     </header>
     <main>
-      <section class="about">
-        <h2 class="sr-only">About</h2>
+      <section class='about'>
+        <h2 class='sr-only'>About</h2>
         <AvatarImage />
         <p>
-          I'm a frontend engineer and engineering leader that loves building products that make people's lives easier and joyful. I'm particularly passionate about the space between code and design, developer experience, and building products that are inclusive and accessible.
+          I'm a frontend engineer and engineering leader that loves building products that make
+          people's lives easier and joyful. I'm particularly passionate about the space between code
+          and design, developer experience, and building products that are inclusive and accessible.
         </p>
         <p>
-          I've worked in a wide variety of domains, from enterprise software to consumer products. I've worked on a variety of teams, from small startups to large enterprises. I've worked on a variety of products, from frontend developer tools to marketing sites to enterprise software.
+          I've worked in a wide variety of domains, from enterprise software to consumer products.
+          I've worked on a variety of teams, from small startups to large enterprises. I've worked
+          on a variety of products, from frontend developer tools to marketing sites to enterprise
+          software.
         </p>
         <p>
-          I cut my teeth on HTML, CSS, PHP and MySQL when I was in high school, long before anyone had ever heard the term "Frontend Engineer". I meanandered through college, getting into Art History and attending DIY and experimental house shows in Columbus, Ohio. I eventually found my way to the University of Texas at Austin, where I studied at the School of Information. From that point on, I became obsessed with frontend technologies and building software for the web.
+          I cut my teeth on HTML, CSS, PHP and MySQL when I was in high school, long before anyone
+          had ever heard the term "Frontend Engineer". I meanandered through college, getting into
+          Art History and attending DIY and experimental house shows in Columbus, Ohio. I eventually
+          found my way to the University of Texas at Austin, where I studied at the School of
+          Information. From that point on, I became obsessed with frontend technologies and building
+          software for the web.
         </p>
         <p>
-          Through my experience working a variety of teams and getting to know the people using the software we built along with many lessons learned in school and in life, I've come to believe that the best approach is to follow a few simple rules. Have empathy for your users, be kind to your colleagues, and never stop learning new things. Those three things will get you very far. One more thing, don't forget to have fun! Problems will be constant, but the joy you get from solving them will be fleeting. Don't forget to enjoy the ride 🎢.
+          Through my experience working a variety of teams and getting to know the people using the
+          software we built along with many lessons learned in school and in life, I've come to
+          believe that the best approach is to follow a few simple rules. Have empathy for your
+          users, be kind to your colleagues, and never stop learning new things. Those three things
+          will get you very far. One more thing, don't forget to have fun! Problems will be
+          constant, but the joy you get from solving them will be fleeting. Don't forget to enjoy
+          the ride 🎢.
         </p>
         <p>
-          Outside, of work and my career, I like to spend time my partner Beth and our daughter Ramona. As a family, we enjoy traveling to new places, playing board games, and watching movies. I enjoy listening to a bunch of different kinds of music, reading, playing around with synthesizers and vintage keyboards, skateboarding and drawing.
+          Outside, of work and my career, I'm a proud parent to a beautiful daughter, a first-grader
+          and certified wild child. As a family, we enjoy traveling to new places, playing board
+          games, reading books and watching movies. Personally, I enjoy listening to a bunch of
+          different kinds of music, reading, playing around with synthesizers and vintage keyboards,
+          skateboarding, drawing and running.
         </p>
       </section>
 
-      <div class="waves">
+      <div class='waves'>
         <Wave color={altColors[9]} />
         <Wave color={altColors[11]} />
         <Wave color={altColors[13]} />
       </div>
-      <section class="projects">
-        <h2 class="sr-only">Projects</h2>
-        <a href="https://oldmanyellsat.netlify.app" class="project">
+      <section class='projects'>
+        <h2 class='sr-only'>Projects</h2>
+        <a href='https://oldmanyellsat.netlify.app' class='project'>
           Meme Generator ↗
           <span>Old man yells at cloud</span>
         </a>
-        <a href="https://frontend.chat" class="project">
+        <a href='https://frontend.chat' class='project'>
           Frontend Chat ↗
           <span>Discover frontend chat communities</span>
         </a>
-        <a href="https://cuuute.netlify.app" class="project">
+        <a href='https://cuuute.netlify.app' class='project'>
           Cuuuute ↗
 
           <span>A cute animal for every PR</span>
         </a>
-        <a href="https://cymharu.netlify.app" class="project">
+        <a href='https://cymharu.netlify.app' class='project'>
           Cymharu ↗
 
           <span>Compare city data side-by-side</span>
         </a>
       </section>
-      <div class="waves">
+      <div class='waves'>
         <Wave color={altColors[16]} />
         <Wave color={altColors[15]} />
         <Wave color={altColors[13]} />
       </div>
     </main>
     <footer>
-      <div class="footer-content">
+      <div class='footer-content'>
         <p>
-          Built with <a href="https://astro.build">Astro</a> and <a href="https://netlify.com">Netlify</a>.
+          Built with <a href='https://astro.build'>Astro</a> and <a href='https://netlify.com'
+            >Netlify</a
+          >.
         </p>
         <p>
-          This page was last built on {`${month + 1}/${day}/${year}`} by <a href="https://nicholasmitchell.dev">Nicholas Mitchell</a>
+          This page was last built on {`${month + 1}/${day}/${year}`} by <a
+            href='https://nicomitchell.com'>Nico Mitchell</a
+          >
         </p>
       </div>
     </footer>
@@ -580,30 +625,29 @@ let permalink = 'https://nicholasmitchell.dev/';
 
 <script>
   const debounce = (fn) => {
-    let frame;
+    let frame
     return (...params) => {
       if (frame) {
-        cancelAnimationFrame(frame);
+        cancelAnimationFrame(frame)
       }
       frame = requestAnimationFrame(() => {
-        fn(...params);
-      });
+        fn(...params)
+      })
     }
-  };
+  }
 
   const storeScroll = () => {
-    const position = (Math.ceil(window.scrollY / 400) * 400).toString();
-    document.documentElement.dataset.scroll = position;
+    const position = (Math.ceil(window.scrollY / 400) * 400).toString()
+    document.documentElement.dataset.scroll = position
   }
 
   const main = () => {
-    document.addEventListener('scroll', debounce(storeScroll), { passive: true });
+    document.addEventListener('scroll', debounce(storeScroll), { passive: true })
 
-    storeScroll();
+    storeScroll()
 
     window.history.scrollRestoration = 'auto'
   }
 
   main()
-
 </script>
